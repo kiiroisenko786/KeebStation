@@ -302,3 +302,4 @@ D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\refint\API.dll
 D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\API.pdb
 D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\API.genruntimeconfig.cache
 D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\ref\API.dll
+D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\API.sourcelink.json
