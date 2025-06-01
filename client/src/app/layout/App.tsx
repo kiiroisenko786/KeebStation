@@ -1,11 +1,13 @@
-import { useState } from "react"
 import { Box, Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
+import { useAppSelector } from "../store/store";
+
 
 function App() {
   // [state that we want to change, function to change it], (initial value)
-  const [darkMode, setDarkMode] = useState(false);
+  // No longer using useState, instead using Redux to manage state but will keep that here for reference
+  const {darkMode} = useAppSelector(state => state.ui);
   const palleteType = darkMode ? 'dark' : 'light';
 
   const theme = createTheme({
@@ -17,9 +19,6 @@ function App() {
     }
   });
 
-  function toggleDarkMode() {
-    setDarkMode(!darkMode);
-  }
   
   /* updating state
   provide previous state to function, spread it into new array that will replace previous state
@@ -29,7 +28,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
-      <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>
+      <Navbar/>
       <Box sx={{minHeight: '100vh', background: darkMode ? 'radial-gradient(circle, #1e3aba, #111b27)' : 'radial-gradient(circle, #baecf9, #f0f9ff)', py: 6}}>
         <Container maxWidth="xl" sx={{marginTop: 8}}>
           <Outlet/>
