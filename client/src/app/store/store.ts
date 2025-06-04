@@ -3,6 +3,7 @@ import counterReducer, { counterSlice } from "../../features/contact/counterRedu
 import { useDispatch, useSelector } from "react-redux";
 import { productApi } from "../../features/shop/productApi";
 import { uiSlice } from "../layout/uiSlice";
+import { errorApi } from "../../features/about/errorApi";
 
 // legacy_createStore is used for compatibility with older code
 export function configureTheStore() {
@@ -12,12 +13,13 @@ export function configureTheStore() {
 export const store = configureStore({
   reducer: {
     [productApi.reducerPath]: productApi.reducer,
+    [errorApi.reducerPath]: errorApi.reducer,
     counter: counterSlice.reducer,
     ui: uiSlice.reducer
   },
   // Need to add middleware here
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productApi.middleware)
+    getDefaultMiddleware().concat(productApi.middleware, errorApi.middleware),
 });
 
 // Get this from redux quickstart tutorial documentation
