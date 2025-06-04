@@ -1,4 +1,5 @@
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,13 +14,18 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 
 // Add CORS policy
 builder.Services.AddCors();
+// Inject the exception handling middleware so we can use the logger and environment
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// Add exception middleware to http request pipeline, at the top because any middleware can throw exceptions and it'll go up the middleware pipeline until something catches it
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(opt =>
 {
-opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000");
+  // Allow any header and method, and specify the allowed origin
+  opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000");
 });
 
 app.MapControllers();
