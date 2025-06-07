@@ -9,11 +9,15 @@ import { router } from './app/routes/Routes.tsx';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import { store } from './app/store/store.ts';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
+      {/* Can use hideProgressBar also*/}
+      <ToastContainer position="bottom-right" theme='colored'/>
       <RouterProvider router={router}/>
     </Provider>
   </StrictMode>,

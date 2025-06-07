@@ -2,8 +2,9 @@
 .git
 .vscode
 
-appsettings.json
-appsettings.Development.json
+# Appsettings files
+#appsettings.json
+#appsettings.Development.json
 
 # dependencies
 /node_modules
