@@ -22,7 +22,7 @@ public class BuggyController : BaseApiController
   [HttpGet("unauthorized")]
   public IActionResult GetUnauthorized()
   {
-    return Unauthorized("You are not authorized to access this resource.");
+    return Unauthorized();
   }
 
   [HttpGet("validation-error")]
