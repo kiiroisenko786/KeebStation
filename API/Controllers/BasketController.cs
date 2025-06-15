@@ -1,6 +1,8 @@
 using System;
 using API.Data;
+using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,17 +11,17 @@ namespace API.Controllers;
 public class BasketController(StoreContext context) : BaseApiController
 {
   [HttpGet]
-  public async Task<ActionResult<Basket>> GetBasket()
+  public async Task<ActionResult<BasketsDto>> GetBasket()
   {
     var basket = await RetrieveBasket();
 
     if (basket == null) return NoContent();
 
-    return basket;
+    return basket.ToDto();
   }
 
   [HttpPost]
-  public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
+  public async Task<ActionResult<BasketsDto>> AddItemToBasket(int productId, int quantity)
   {
     // get basket
     var basket = await RetrieveBasket();
@@ -39,20 +41,27 @@ public class BasketController(StoreContext context) : BaseApiController
     // if the result is greater than 0, it means the changes were saved successfully
     var result = await context.SaveChangesAsync() > 0;
 
-    if (result) return CreatedAtAction(nameof(GetBasket), basket);
+    if (result) return CreatedAtAction(nameof(GetBasket), basket.ToDto());
 
     return BadRequest("Problem updating basket");
   }
 
 
   [HttpDelete]
-  public async Task<ActionResult> RemoveItemFromBasket(int productId, int quantity)
+  public async Task<ActionResult<BasketsDto>> RemoveItemFromBasket(int productId, int quantity)
   {
     // get basket
-
+    var basket = await RetrieveBasket();
     // remove item from basket or reduce quantity
+    if (basket == null) return BadRequest("Unable to retrieve basket");
 
+    basket.RemoveItem(productId, quantity);
+    
     // save changes
+    var result = await context.SaveChangesAsync() > 0;
+    if (result) return Ok();
+
+    return BadRequest("Problem updating basket");
   }
 
   public async Task<Basket?> RetrieveBasket()

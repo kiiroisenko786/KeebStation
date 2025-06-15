@@ -24,8 +24,8 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(opt =>
 {
-  // Allow any header and method, and specify the allowed origin
-  opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000");
+  // Allow any header and method, and specify the allowed origin and credentials to send cookies
+  opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000");
 });
 
 app.MapControllers();
