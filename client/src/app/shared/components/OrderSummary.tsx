@@ -1,16 +1,17 @@
-import {
-  Box,
-  Typography,
-  Divider,
-  Button,
-  TextField,
-  Paper,
-} from "@mui/material";
+import { Box, Typography, Divider, Button, TextField, Paper } from "@mui/material";
 import { currencyFormat } from "../../../lib/Util";
+import { useFetchBasketQuery } from "../../../features/basket/basketApi";
+import type { Item } from "../../models/basket";
 
-export default function OrderSummary() {
-  const subtotal = 0;
-  const deliveryFee = 0;
+export default function OrderSummary() { 
+  const {data: basket} = useFetchBasketQuery();
+  
+  const subtotal = basket?.items.reduce((total: number, item: Item) => total + item.price * item.quantity, 0) ?? 0;
+  // Assuming a flat delivery fee of £5.99 for orders under £100
+  const deliveryFee = subtotal > 10000 ? 0 : 599;
+  console.log(subtotal);
+  console.log(deliveryFee);
+  const total = (subtotal || 0) + deliveryFee;
 
   return (
     <Box
@@ -30,7 +31,9 @@ export default function OrderSummary() {
         <Box mt={2}>
           <Box display="flex" justifyContent="space-between" mb={1}>
             <Typography color="textSecondary">Subtotal</Typography>
-            <Typography>{currencyFormat(subtotal)}</Typography>
+            <Typography>
+              {currencyFormat(subtotal as number)}
+            </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" mb={1}>
             <Typography color="textSecondary">Discount</Typography>
@@ -46,7 +49,7 @@ export default function OrderSummary() {
           <Divider sx={{ my: 2 }} />
           <Box display="flex" justifyContent="space-between" mb={1}>
             <Typography color="textSecondary">Total</Typography>
-            <Typography>{currencyFormat(subtotal + deliveryFee)}</Typography>
+            <Typography>{currencyFormat(total)}</Typography>
           </Box>
         </Box>
 
