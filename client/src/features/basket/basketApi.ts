@@ -29,19 +29,28 @@ export const basketApi = createApi({
       },
       // Optimistic update to immediately reflect the change in the UI
       onQueryStarted: async ({product, quantity}, {dispatch, queryFulfilled}) => {
+        let isNewBasket = false;
         const patchResult = dispatch(
           basketApi.util.updateQueryData("fetchBasket", undefined, (draft) => {
             // Add typeguard to check if product is an Item or Product
             const productId = isBasketItem(product) ? product.productId : product.id;
-            const existingItem = draft.items.find(item => item.productId === productId);
-            if (existingItem) existingItem.quantity += quantity;
-            else draft.items.push(isBasketItem(product) ? product : new Item(product, quantity));
+            
+            // Check if the basket is a new basket (basket has no id)
+            if (!draft?.basketId) isNewBasket = true;
+
+            if (!isNewBasket) {
+              const existingItem = draft.items.find(item => item.productId === productId);
+              if (existingItem) existingItem.quantity += quantity;
+              // Had an issue with the item not being serializable, so we ensure to spread the product properties
+              else draft.items.push(isBasketItem(product) ? product : {...product, productId: product.id, quantity});
+            }
           })
         )
 
         try {
           await queryFulfilled;
-          // Invalidate the Basket cache to ensure the latest data is fetched
+          // Invalidate the Basket cache to ensure the latest data is fetched if the basket was new
+          if (isNewBasket) dispatch(basketApi.util.invalidateTags(["Basket"]));
         } catch (error) {
           console.log(error);
           // Rollback the optimistic update if the query fails
