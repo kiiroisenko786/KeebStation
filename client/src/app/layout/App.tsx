@@ -1,6 +1,6 @@
 import { Box, Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useAppSelector } from "../store/store";
 
 
@@ -27,6 +27,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ScrollRestoration/>
       <CssBaseline/>
       <Navbar/>
       <Box sx={{minHeight: '100vh', background: darkMode ? 'radial-gradient(circle, #1e3aba, #111b27)' : 'radial-gradient(circle, #baecf9, #f0f9ff)', py: 6}}>
@@ -37,10 +38,5 @@ function App() {
     </ThemeProvider>
   )
 }
-
-{/* <Box display='flex' justifyContent='center' gap={3} marginY={3}>
-        <Typography variant="h4">KeebStation</Typography>
-        <Button variant="contained" onClick={addProduct}>Add Product</Button>
-</Box> */}
 
 export default App

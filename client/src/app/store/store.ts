@@ -5,6 +5,7 @@ import { productApi } from "../../features/shop/productApi";
 import { uiSlice } from "../layout/uiSlice";
 import { errorApi } from "../../features/about/errorApi";
 import { basketApi } from "../../features/basket/basketApi";
+import { productSlice } from "../../features/shop/productslice";
 
 // legacy_createStore is used for compatibility with older code
 export function configureTheStore() {
@@ -17,7 +18,8 @@ export const store = configureStore({
     [errorApi.reducerPath]: errorApi.reducer,
     [basketApi.reducerPath]: basketApi.reducer,
     counter: counterSlice.reducer,
-    ui: uiSlice.reducer
+    ui: uiSlice.reducer,
+    product: productSlice.reducer
   },
   // Need to add middleware here
   middleware: (getDefaultMiddleware) =>
