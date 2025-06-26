@@ -1,5 +1,7 @@
 using API.Data;
+using API.Entities;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,19 @@ builder.Services.AddCors();
 // Inject the exception handling middleware so we can use the logger and environment
 builder.Services.AddTransient<ExceptionMiddleware>();
 
+// Add Identity services
+builder.Services.AddIdentityApiEndpoints<User>(options =>
+{
+  options.User.RequireUniqueEmail = true;
+}).AddRoles<IdentityRole>().AddEntityFrameworkStores<StoreContext>();
+
+// Configure cookie settings for cross-origin requests
+builder.Services.ConfigureApplicationCookie(options =>
+{
+  options.Cookie.SameSite = SameSiteMode.None;
+  options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,7 +43,11 @@ app.UseCors(opt =>
   opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000");
 });
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
+app.MapGroup("api").MapIdentityApi<User>();
 
 DbInitializer.InitDb(app);
 

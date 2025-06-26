@@ -4,7 +4,7 @@ import { useFetchFiltersQuery, useFetchProductsQuery } from "./productApi";
 import Filters from "./Filters";
 import { useAppDispatch, useAppSelector } from "../../app/store/store";
 import AppPagination from "../../app/shared/components/AppPagination";
-import { setPageNumber } from "./productslice";
+import { setPageNumber } from "./productSlice";
 
 export default function Products() {
   const productParams = useAppSelector(state => state.product);

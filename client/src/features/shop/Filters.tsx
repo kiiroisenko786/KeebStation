@@ -2,7 +2,7 @@ import { Box, Button, Paper } from "@mui/material";
 import Search from "./Search";
 import RadioButtonGroup from "../../app/shared/components/RadioButtonGroup";
 import { useAppDispatch, useAppSelector } from "../../app/store/store";
-import { resetParams, setBrands, setOrderby, setTypes } from "./productslice";
+import { resetParams, setBrands, setOrderby, setTypes } from "./productSlice";
 import CheckboxButtons from "../../app/shared/components/CheckboxButtons";
 
 const sortOptions = [
