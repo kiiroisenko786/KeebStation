@@ -23,7 +23,8 @@ export default function UserMenu({ user }: Props) {
     <div>
       <Button
         onClick={handleClick}
-        sx={{ color: 'inherit' }}
+        sx={{ color: 'inherit', fontSize: '1.1rem'}}
+        size="large"
       >
         {user.email}
       </Button>
