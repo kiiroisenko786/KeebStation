@@ -308,3 +308,7 @@ D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptog
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Newtonsoft.Json.dll
+D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Stripe.net.dll
+D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll

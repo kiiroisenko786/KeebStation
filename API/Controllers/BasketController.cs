@@ -11,7 +11,7 @@ namespace API.Controllers;
 public class BasketController(StoreContext context) : BaseApiController
 {
   [HttpGet]
-  public async Task<ActionResult<BasketsDto>> GetBasket()
+  public async Task<ActionResult<BasketDto>> GetBasket()
   {
     var basket = await RetrieveBasket();
 
@@ -21,7 +21,7 @@ public class BasketController(StoreContext context) : BaseApiController
   }
 
   [HttpPost]
-  public async Task<ActionResult<BasketsDto>> AddItemToBasket(int productId, int quantity)
+  public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
   {
     // get basket
     var basket = await RetrieveBasket();
@@ -48,7 +48,7 @@ public class BasketController(StoreContext context) : BaseApiController
 
 
   [HttpDelete]
-  public async Task<ActionResult<BasketsDto>> RemoveItemFromBasket(int productId, int quantity)
+  public async Task<ActionResult<BasketDto>> RemoveItemFromBasket(int productId, int quantity)
   {
     // get basket
     var basket = await RetrieveBasket();

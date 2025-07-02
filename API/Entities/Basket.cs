@@ -8,6 +8,10 @@ public class Basket
   // BasketId will be used as a cookie to persist the basket across sessions
   public required string BasketId { get; set; }
   public List<BasketItem> Items { get; set; } = [];
+  public string? ClientSecret { get; set; }
+
+  // PaymentIntentId is used to track the payment intent for this basket
+  public string? PaymentIntentId { get; set; }
 
   public void AddItem(Product product, int Quantity)
   {

@@ -3,6 +3,8 @@ import type { Product } from "./product"
 export type Basket = {
   basketId: string
   items: Item[]
+  clientSecret?: string
+  paymentIntentId?: string
 }
 
 // Changed this from Type to Class to allow for constructor initialization

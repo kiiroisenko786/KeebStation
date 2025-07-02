@@ -1,6 +1,7 @@
 using API.Data;
 using API.Entities;
 using API.Middleware;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,18 +20,14 @@ builder.Services.AddCors();
 // Inject the exception handling middleware so we can use the logger and environment
 builder.Services.AddTransient<ExceptionMiddleware>();
 
+// Register PaymentsService
+builder.Services.AddScoped<PaymentsService>();
+
 // Add Identity services
 builder.Services.AddIdentityApiEndpoints<User>(options =>
 {
   options.User.RequireUniqueEmail = true;
 }).AddRoles<IdentityRole>().AddEntityFrameworkStores<StoreContext>();
-
-// Configure cookie settings for cross-origin requests
-builder.Services.ConfigureApplicationCookie(options =>
-{
-  options.Cookie.SameSite = SameSiteMode.None;
-  options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-});
 
 var app = builder.Build();
 
