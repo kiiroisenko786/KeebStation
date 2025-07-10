@@ -1,5 +1,5 @@
 import { Box, Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar.tsx";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useAppSelector } from "../store/store";
 
