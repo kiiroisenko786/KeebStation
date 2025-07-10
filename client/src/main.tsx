@@ -5,10 +5,10 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { router } from './app/routes/Routes.tsx';
+import { router } from './app/routes/Routes';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
-import { store } from './app/store/store.ts';
+import { store } from './app/store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
