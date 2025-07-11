@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithErrorHandling } from "../../app/api/baseApi";
 import { Item, type Basket } from "../../app/models/basket";
 import type { Product } from "../../app/models/product";
+import * as Cookies from "js-cookie";
 
 // Typeguard: If the product is a BasketItem, it will have a quantity property
 // This is because a (Basket)Item is an item in the basket that has a quantity, while a Product is just a product without quantity. 
@@ -82,8 +83,19 @@ export const basketApi = createApi({
           patchResult.undo();
         }
       }
+    }),
+    clearBasket: builder.mutation<void, void>({
+      queryFn: () => ({data: undefined}),
+      onQueryStarted: async (_, {dispatch}) => {
+        dispatch(
+          basketApi.util.updateQueryData("fetchBasket", undefined, (draft) => {
+            draft.items = [];
+          })
+        );
+        Cookies.remove("basket_id")
+      }
     })
   })
 })
 
-export const {useFetchBasketQuery, useAddBasketItemMutation, useRemoveBasketItemMutation} = basketApi;
+export const {useFetchBasketQuery, useAddBasketItemMutation, useRemoveBasketItemMutation, useClearBasketMutation} = basketApi;
