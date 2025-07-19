@@ -15,11 +15,11 @@ const steps = ['Address', 'Payment', 'Review'];
 
 export default function CheckoutStepper() {
   const [activeStep, setActiveStep] = useState(0);
-  const {basket} = useBasket();
   // Get name, and spread the rest of the address data so it's separate
   // If data is undefined, provide a default empty object to avoid errors
   // Also make sure this isn't loading before returning the stripe element or it won't fill the address
   const {data: {name, ...restAddress} = {} as Address, isLoading} = useFetchAddressQuery();
+  const {basket, clearBasket} = useBasket();
   const [updateAddress] = useUpdateAddressMutation();
   const [saveAddressChecked, setSaveAddressChecked] = useState(false);
   const elements = useElements();
@@ -27,7 +27,7 @@ export default function CheckoutStepper() {
   const [addressComplete, setAddressComplete] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const {total, clearBasket} = useBasket();
+  const {total} = useBasket();
   const navigate = useNavigate();
   const [confirmationToken, setConfirmationToken] = useState<ConfirmationToken | null>(null);
   
@@ -49,14 +49,15 @@ export default function CheckoutStepper() {
     if (activeStep === 2) {
       await confirmPayment();
     }
-    setActiveStep(step => step + 1);
+    if (activeStep < 2) setActiveStep(step => step + 1);
   }
 
   const confirmPayment = async () => {
+    setSubmitting(true);
     try {
-      setSubmitting(true);
-      if (!confirmationToken || !basket?.clientSecret) throw new Error("Unable to process payment");
-
+      // Defensive check to ensure we have a confirmation token
+      if (!confirmationToken || !basket?.clientSecret) throw new Error("Unable to confirm payment");
+      
       const paymentResult = await stripe?.confirmPayment({
         clientSecret: basket.clientSecret,
         redirect: 'if_required',
@@ -66,7 +67,7 @@ export default function CheckoutStepper() {
       });
 
       if (paymentResult?.paymentIntent?.status === 'succeeded') {
-        navigate('/checkout/success')
+        navigate('/checkout/success');
         clearBasket();
       } else if (paymentResult?.error) {
         throw new Error(paymentResult.error.message);
@@ -74,9 +75,11 @@ export default function CheckoutStepper() {
         throw new Error("Payment confirmation failed");
       }
     } catch (error) {
+      // Because error will be of type unknown, we need to check if it's an instance of Error
       if (error instanceof Error) {
         toast.error(error.message);
       }
+      // Move back a step if payment confirmation fails
       setActiveStep(step => step - 1);
     } finally {
       setSubmitting(false);
@@ -134,7 +137,12 @@ export default function CheckoutStepper() {
           />} label='Save as default address'/>
         </Box>
         <Box sx={{display: activeStep === 1 ? 'block' : 'none'}}>
-          <PaymentElement onChange={handlePaymentChange}/>
+          <PaymentElement onChange={handlePaymentChange} options={{
+            wallets: {
+              applePay: 'never',
+              googlePay: 'never'
+            }
+          }}/>
         </Box>
         <Box sx={{display: activeStep === 2 ? 'block' : 'none'}}>
           <Review confirmationToken={confirmationToken}/>
@@ -143,12 +151,12 @@ export default function CheckoutStepper() {
 
       <Box display='flex' paddingTop={2} justifyContent='space-between'>
         <Button onClick={handleBack}>Back</Button>
-        <LoadingButton 
-          disabled={
-            (activeStep === 0 && !addressComplete) || (activeStep === 1 && !paymentComplete) || submitting
-          } 
-          loading={submitting}
-          onClick={handleNext}>{activeStep === steps.length - 1 ? `Pay ${currencyFormat(total)}` : 'Next'}
+        <LoadingButton onClick={handleNext} disabled={
+          (activeStep === 0 && !addressComplete) ||
+          (activeStep === 1 && !paymentComplete) ||
+          submitting
+        } loading={submitting}>
+          {activeStep === steps.length - 1 ? `Pay ${currencyFormat(total)}` : 'Next'}
         </LoadingButton>
       </Box>
     </Paper>
