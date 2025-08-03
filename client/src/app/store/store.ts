@@ -8,6 +8,7 @@ import { basketApi } from "../../features/basket/basketApi";
 import { productSlice } from "../../features/shop/productSlice";
 import { accountApi } from "../../features/account/accountApi";
 import { checkoutApi } from "../../features/checkout/checkoutApi";
+import { orderApi } from "../../features/orders/orderApi";
 
 // legacy_createStore is used for compatibility with older code
 export function configureTheStore() {
@@ -21,6 +22,7 @@ export const store = configureStore({
     [basketApi.reducerPath]: basketApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
     [checkoutApi.reducerPath]: checkoutApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
     counter: counterSlice.reducer,
     ui: uiSlice.reducer,
     product: productSlice.reducer
@@ -32,7 +34,8 @@ export const store = configureStore({
       errorApi.middleware,
       basketApi.middleware,
       accountApi.middleware,
-      checkoutApi.middleware
+      checkoutApi.middleware,
+      orderApi.middleware
     ),
 });
 

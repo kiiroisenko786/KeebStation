@@ -10,6 +10,7 @@ import { currencyFormat } from "../../lib/Util";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
+import { useCreateOrderMutation } from "../orders/orderApi";
 
 const steps = ['Address', 'Payment', 'Review'];
 
@@ -19,6 +20,7 @@ export default function CheckoutStepper() {
   // If data is undefined, provide a default empty object to avoid errors
   // Also make sure this isn't loading before returning the stripe element or it won't fill the address
   const {data: {name, ...restAddress} = {} as Address, isLoading} = useFetchAddressQuery();
+  const [createOrder] = useCreateOrderMutation();
   const {basket, clearBasket} = useBasket();
   const [updateAddress] = useUpdateAddressMutation();
   const [saveAddressChecked, setSaveAddressChecked] = useState(false);
@@ -57,6 +59,9 @@ export default function CheckoutStepper() {
     try {
       // Defensive check to ensure we have a confirmation token
       if (!confirmationToken || !basket?.clientSecret) throw new Error("Unable to confirm payment");
+
+      const orderModel = await createOrderModel();
+      const orderResult = await createOrder(orderModel);
       
       const paymentResult = await stripe?.confirmPayment({
         clientSecret: basket.clientSecret,
@@ -67,7 +72,7 @@ export default function CheckoutStepper() {
       });
 
       if (paymentResult?.paymentIntent?.status === 'succeeded') {
-        navigate('/checkout/success');
+        navigate('/checkout/success', {state: orderResult});
         clearBasket();
       } else if (paymentResult?.error) {
         throw new Error(paymentResult.error.message);
@@ -84,6 +89,15 @@ export default function CheckoutStepper() {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  const createOrderModel = async () => {
+    const shippingAddress = await getStripeAddress();
+    const paymentSummary = confirmationToken?.payment_method_preview.card;
+
+    if (!shippingAddress || !paymentSummary) throw new Error("Problem creating order");
+
+    return {shippingAddress, paymentSummary};
   }
 
   const getStripeAddress = async () => {
