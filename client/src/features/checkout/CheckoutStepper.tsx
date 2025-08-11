@@ -3,7 +3,6 @@ import { AddressElement, PaymentElement, useElements, useStripe } from "@stripe/
 import { useState } from "react"
 import Review from "./Review";
 import { useFetchAddressQuery, useUpdateAddressMutation } from "../account/accountApi";
-import type { Address } from "../../app/models/user";
 import type { ConfirmationToken, StripeAddressElementChangeEvent, StripePaymentElementChangeEvent } from "@stripe/stripe-js";
 import { useBasket } from "../../lib/hooks/useBasket";
 import { currencyFormat } from "../../lib/Util";
@@ -16,10 +15,7 @@ const steps = ['Address', 'Payment', 'Review'];
 
 export default function CheckoutStepper() {
   const [activeStep, setActiveStep] = useState(0);
-  // Get name, and spread the rest of the address data so it's separate
-  // If data is undefined, provide a default empty object to avoid errors
-  // Also make sure this isn't loading before returning the stripe element or it won't fill the address
-  const {data: {name, ...restAddress} = {} as Address, isLoading} = useFetchAddressQuery();
+  const {data, isLoading} = useFetchAddressQuery();
   const [createOrder] = useCreateOrderMutation();
   const {basket, clearBasket} = useBasket();
   const [updateAddress] = useUpdateAddressMutation();
@@ -29,9 +25,14 @@ export default function CheckoutStepper() {
   const [addressComplete, setAddressComplete] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const {total} = useBasket();
+const {total} = useBasket();
   const navigate = useNavigate();
   const [confirmationToken, setConfirmationToken] = useState<ConfirmationToken | null>(null);
+
+  let name, restAddress;
+  if (data) {
+    ({name, ...restAddress} = data);
+  }
   
   const handleNext = async () => {
     // If on the first step, update the address if the checkbox is checked

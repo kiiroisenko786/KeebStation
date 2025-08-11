@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt =>
 {
-  opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+  opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 // Add CORS policy
@@ -34,6 +34,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 // Add exception middleware to http request pipeline, at the top because any middleware can throw exceptions and it'll go up the middleware pipeline until something catches it
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapFallbackToController("Index", "Fallback");
+
 app.UseCors(opt =>
 {
   // Allow any header and method, and specify the allowed origin and credentials to send cookies
@@ -46,6 +51,6 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<User>();
 
-DbInitializer.InitDb(app);
+await DbInitializer.InitDb(app);
 
 app.Run();
