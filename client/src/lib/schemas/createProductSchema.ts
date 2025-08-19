@@ -2,7 +2,10 @@ import z from "zod";
 
 const fileSchema = z.instanceof(File).refine(file => file.size > 0, {
   message: "A file must be uploaded"
-})
+}).transform(file => ({
+  ...file,
+  preview: URL.createObjectURL(file)
+}))
 
 export const createProductSchema = z.object({
   name: z.string({required_error: "Name of product is required"}),
@@ -17,7 +20,11 @@ export const createProductSchema = z.object({
   quantityInStock: z.coerce.number({required_error: "Quantity in stock is required"}).min(1, {
     message: "Quantity in stock must be at least 1"
   }),
-  file: fileSchema
-})
+  imageUrl: z.string().optional(),
+  file: fileSchema.optional()
+}).refine((data) => data.imageUrl || data.file, {
+  message: "Please provide an image",
+  path: ["file"]
+});
 
 export type CreateProductSchema = z.infer<typeof createProductSchema>;

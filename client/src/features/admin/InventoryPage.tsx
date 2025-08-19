@@ -7,15 +7,32 @@ import AppPagination from "../../app/shared/components/AppPagination";
 import { setPageNumber } from "../shop/productSlice";
 import { useState } from "react";
 import ProductForm from "./ProductForm";
+import { Product } from "../../app/models/product";
+import { useDeleteProductMutation } from "./adminApi";
 
 export default function InventoryPage() {
   const productParams = useAppSelector(state => state.product);
-  const {data} = useFetchProductsQuery(productParams);
+  const {data, refetch} = useFetchProductsQuery(productParams);
   const dispatch = useAppDispatch();
   const [editMode, setEditMode] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [deleteProduct] = useDeleteProductMutation();
 
-  if (editMode) return <ProductForm/>
+  const handleSelectProduct = (product: Product) => {
+    setSelectedProduct(product);
+    setEditMode(true);
+  }
 
+  const handleDeleteProduct = async(id: number) => {
+    try {
+      await deleteProduct(id);
+      refetch();
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  if (editMode) return <ProductForm setEditMode={setEditMode} product={selectedProduct} refetch={refetch} setSelectedProduct={setSelectedProduct} />
 
   return (
     <>
@@ -51,14 +68,14 @@ export default function InventoryPage() {
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
                 <TableCell align="right">
-                  <Button startIcon={<Edit/>}/>
-                  <Button startIcon={<Delete/>} color="error"/>
+                  <Button onClick={() => handleSelectProduct(product)} startIcon={<Edit/>}/>
+                  <Button onClick={() => handleDeleteProduct(product.id)} startIcon={<Delete/>} color="error"/>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        <Box>
+        <Box sx={{p:2}}>
           {data?.pagination && data.items.length > 0 && (
             <AppPagination metadata={data.pagination} onPageChange={(page) => dispatch(setPageNumber(page))}/>
           )}
