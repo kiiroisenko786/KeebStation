@@ -28,12 +28,12 @@ export default function AboutPage() {
         <Typography variant="h4" gutterBottom color="primary">
           Project Overview
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           KeebStation is a full-stack e-commerce application designed for mechanical keyboard enthusiasts. 
           This project serves as a comprehensive learning platform, demonstrating modern web development 
           practices and technologies.
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           From product browsing to secure checkout, every feature is built with scalability and 
           user experience in mind. The application showcases real-world e-commerce functionality 
           including product management, image optimization, and responsive design.
@@ -117,39 +117,6 @@ export default function AboutPage() {
           </Paper>
         </Grid>
       </Grid>
-
-      {/* Learning Goals */}
-      <Paper elevation={2} sx={{ p: 4 }}>
-        <Typography variant="h4" gutterBottom color="primary">
-          Learning Objectives
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Typography variant="h6" gutterBottom>
-              Technical Skills
-            </Typography>
-            <Typography variant="body2" component="ul">
-              <li>Full-stack web development</li>
-              <li>RESTful API design and implementation</li>
-              <li>Database design with Entity Framework</li>
-              <li>Modern React development patterns</li>
-              <li>Cloud service integration</li>
-            </Typography>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Typography variant="h6" gutterBottom>
-              Best Practices
-            </Typography>
-            <Typography variant="body2" component="ul">
-              <li>Clean code architecture</li>
-              <li>Responsive web design</li>
-              <li>Performance optimization</li>
-              <li>Security implementation</li>
-              <li>Version control with Git</li>
-            </Typography>
-          </Grid>
-        </Grid>
-      </Paper>
     </Container>
   );
 }
