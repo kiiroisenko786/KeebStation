@@ -165,7 +165,7 @@ export default function ContactPage() {
                       Email
                     </Typography>
                     <Typography variant="body1">
-                      your.email@example.com
+                      projectyuni5@gmail.com
                     </Typography>
                   </Box>
                 </Box>
@@ -207,7 +207,7 @@ export default function ContactPage() {
                   variant="outlined"
                   startIcon={<GitHub />}
                   fullWidth
-                  href="https://github.com/yourusername"
+                  href="https://github.com/kiiroisenko786"
                   target="_blank"
                   sx={{ justifyContent: 'flex-start' }}
                 >
@@ -218,7 +218,7 @@ export default function ContactPage() {
                   variant="outlined"
                   startIcon={<LinkedIn />}
                   fullWidth
-                  href="https://linkedin.com/in/yourprofile"
+                  href="https://linkedin.com/in/taahaa-yunis"
                   target="_blank"
                   sx={{ justifyContent: 'flex-start' }}
                 >

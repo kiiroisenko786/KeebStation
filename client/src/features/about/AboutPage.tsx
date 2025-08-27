@@ -36,7 +36,7 @@ export default function AboutPage() {
         <Typography variant="body1">
           From product browsing to secure checkout, every feature is built with scalability and 
           user experience in mind. The application showcases real-world e-commerce functionality 
-          including product management, image optimization, and responsive design.
+          including product management, image hosting, and responsive design.
         </Typography>
       </Paper>
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
             <Stack spacing={1}>
               <Chip label="ASP.NET Core 9.0" variant="outlined" />
               <Chip label="Entity Framework Core" variant="outlined" />
-              <Chip label="SQLite Database" variant="outlined" />
+              <Chip label="Azure SQL Database" variant="outlined" />
               <Chip label="RESTful API Design" variant="outlined" />
             </Stack>
           </Paper>
@@ -76,8 +76,7 @@ export default function AboutPage() {
             <Stack spacing={1}>
               <Chip label="React 18" variant="outlined" />
               <Chip label="Material-UI (MUI)" variant="outlined" />
-              <Chip label="Vite Build Tool" variant="outlined" />
-              <Chip label="Responsive Design" variant="outlined" />
+              <Chip label="Vite" variant="outlined" />
             </Stack>
           </Paper>
         </Grid>
@@ -112,7 +111,6 @@ export default function AboutPage() {
               <Chip label="TypeScript" variant="outlined" />
               <Chip label="ESLint Code Quality" variant="outlined" />
               <Chip label="Git Version Control" variant="outlined" />
-              <Chip label="Clean Architecture" variant="outlined" />
             </Stack>
           </Paper>
         </Grid>
