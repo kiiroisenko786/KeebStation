@@ -1,52 +1,120 @@
-import { Alert, AlertTitle, Button, ButtonGroup, Container, List, ListItem, Typography } from "@mui/material";
-import { useLazyGet400ErrorQuery, useLazyGet401ErrorQuery, useLazyGet404ErrorQuery, useLazyGet500ErrorQuery, useLazyGetValidationErrorQuery } from "./errorApi";
-import { useState } from "react";
+import { 
+  Container, 
+  Typography, 
+  Box, 
+  Grid, 
+  Paper, 
+  Chip,
+  Stack
+} from "@mui/material";
+import { Code, Storage, Cloud, Security } from "@mui/icons-material";
 
 export default function AboutPage() {
-  // State to hold validation errors
-  const [validationErrors, setValidationErrors] = useState<string[]>([])
-
-  // get lazy hooks, then call it by the trigger in the brackets
-  const [trigger400Error] = useLazyGet400ErrorQuery();
-  const [trigger401Error] = useLazyGet401ErrorQuery();
-  const [trigger404Error] = useLazyGet404ErrorQuery();
-  const [trigger500Error] = useLazyGet500ErrorQuery();
-  const [triggerValidationError] = useLazyGetValidationErrorQuery();
-
-  async function getValidationError() {
-    try {
-      await triggerValidationError().unwrap();
-    } catch (error: unknown) {
-      // Use type guards to narrow down the error type because typescript doesn't know what the type is, and will give an error
-      if (error && typeof error === 'object' && 'message' in error && typeof (error as {message: unknown}).message === 'string') {
-        const errorArray = (error as {message: string}).message.split(', ');
-        setValidationErrors(errorArray);
-      }
-    }
-  }
-
-
   return (
-    <Container maxWidth='lg'>
-      <Typography gutterBottom variant="h3">Errors for testing</Typography>
-      <ButtonGroup fullWidth>
-        <Button variant="contained" onClick={() => trigger400Error().catch(err => console.log(err))}>Test 400 Error</Button>
-        <Button variant="contained" onClick={() => trigger401Error().catch(err => console.log(err))}>Test 401 Error</Button>
-        <Button variant="contained" onClick={() => trigger404Error().catch(err => console.log(err))}>Test 404 Error</Button>
-        <Button variant="contained" onClick={() => trigger500Error().catch(err => console.log(err))}>Test 500 Error</Button>
-        <Button variant="contained" onClick={getValidationError}>Test Validation Error</Button>
-      </ButtonGroup>
-      {validationErrors.length > 0 && (
-        <Alert severity="error">
-          <AlertTitle>Validation Errors</AlertTitle>
-          <List>
-            {validationErrors.map(err => (
-              <ListItem key={err}>{err}</ListItem>
-            ))}
-          </List>
-        </Alert>
-      )
-      }
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      {/* Hero Section */}
+      <Box textAlign="center" mb={6}>
+        <Typography variant="h2" component="h1" gutterBottom fontWeight="bold">
+          About KeebStation
+        </Typography>
+        <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto' }}>
+          A modern e-commerce platform for mechanical keyboard enthusiasts, 
+          built as a learning project to showcase full-stack development skills.
+        </Typography>
+      </Box>
+
+      {/* Project Overview */}
+      <Paper elevation={2} sx={{ p: 4, mb: 4 }}>
+        <Typography variant="h4" gutterBottom color="primary">
+          Project Overview
+        </Typography>
+        <Typography variant="body1">
+          KeebStation is a full-stack e-commerce application designed for mechanical keyboard enthusiasts. 
+          This project serves as a comprehensive learning platform, demonstrating modern web development 
+          practices and technologies.
+        </Typography>
+        <Typography variant="body1">
+          From product browsing to secure checkout, every feature is built with scalability and 
+          user experience in mind. The application showcases real-world e-commerce functionality 
+          including product management, image hosting, and responsive design.
+        </Typography>
+      </Paper>
+
+      {/* Tech Stack Grid */}
+      <Typography variant="h4" gutterBottom color="primary" mb={3}>
+        Technology Stack
+      </Typography>
+      
+      <Grid container spacing={3} mb={4}>
+        {/* Backend */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
+            <Box display="flex" alignItems="center" mb={2}>
+              <Storage sx={{ mr: 1, color: 'primary.main' }} />
+              <Typography variant="h5" fontWeight="bold">
+                Backend
+              </Typography>
+            </Box>
+            <Stack spacing={1}>
+              <Chip label="ASP.NET Core 9.0" variant="outlined" />
+              <Chip label="Entity Framework Core" variant="outlined" />
+              <Chip label="Azure SQL Database" variant="outlined" />
+              <Chip label="RESTful API Design" variant="outlined" />
+            </Stack>
+          </Paper>
+        </Grid>
+
+        {/* Frontend */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
+            <Box display="flex" alignItems="center" mb={2}>
+              <Code sx={{ mr: 1, color: 'primary.main' }} />
+              <Typography variant="h5" fontWeight="bold">
+                Frontend
+              </Typography>
+            </Box>
+            <Stack spacing={1}>
+              <Chip label="React 18" variant="outlined" />
+              <Chip label="Material-UI (MUI)" variant="outlined" />
+              <Chip label="Vite" variant="outlined" />
+            </Stack>
+          </Paper>
+        </Grid>
+
+        {/* Cloud Services */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
+            <Box display="flex" alignItems="center" mb={2}>
+              <Cloud sx={{ mr: 1, color: 'primary.main' }} />
+              <Typography variant="h5" fontWeight="bold">
+                Cloud & Services
+              </Typography>
+            </Box>
+            <Stack spacing={1}>
+              <Chip label="Cloudinary Image Management" variant="outlined" />
+              <Chip label="Docker Containerization" variant="outlined" />
+              <Chip label="Azure Deployment Ready" variant="outlined" />
+            </Stack>
+          </Paper>
+        </Grid>
+
+        {/* Development */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
+            <Box display="flex" alignItems="center" mb={2}>
+              <Security sx={{ mr: 1, color: 'primary.main' }} />
+              <Typography variant="h5" fontWeight="bold">
+                Development
+              </Typography>
+            </Box>
+            <Stack spacing={1}>
+              <Chip label="TypeScript" variant="outlined" />
+              <Chip label="ESLint Code Quality" variant="outlined" />
+              <Chip label="Git Version Control" variant="outlined" />
+            </Stack>
+          </Paper>
+        </Grid>
+      </Grid>
     </Container>
-  )
+  );
 }
