@@ -50,4 +50,3 @@ next-env.d.ts
 /devcerts
 *.key
 *.crt
-docker-compose.yml

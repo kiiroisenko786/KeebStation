@@ -1,0 +1,61 @@
+# .NET
+**/bin/
+**/obj/
+**/out/
+**/*.trx
+**/*.log
+**/TestResults/
+
+# Node.js
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/dist/
+
+# IDEs
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Security - sensitive files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+secrets/
+secrets.json
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+logs/
+*.log
+
+# Development files
+*.md
+README.md
