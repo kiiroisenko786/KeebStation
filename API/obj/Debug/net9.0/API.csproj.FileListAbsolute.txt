@@ -259,10 +259,10 @@ D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\System.Security.Cryptography
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\API.staticwebassets.runtime.json
 D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\compressed\z91z8of7bi-lv13oy6muc.gz
 D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\compressed\4pit3vs01m-69kjnsiwqx.gz
-D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\compressed\dlx89s6nih-hc481r57gz.gz
-D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\compressed\1dpm1p8bmc-seprfgil70.gz
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\AutoMapper.dll
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\CloudinaryDotNet.dll
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Npgsql.dll
 D:\Taahaa\projects\KeebStation\API\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\compressed\jekm41bb2d-n8nzw4s1p7.gz
+D:\Taahaa\projects\KeebStation\API\obj\Debug\net9.0\compressed\1dpm1p8bmc-wwh84eul7b.gz
