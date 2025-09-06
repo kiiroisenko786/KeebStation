@@ -27,13 +27,41 @@ builder.Services.AddDbContext<StoreContext>(opt =>
         throw new InvalidOperationException("Database connection string not found. Please set DATABASE_URL environment variable or configure DefaultConnection.");
     }
     
-    // Parse DATABASE_URL if it's in the format postgres://user:password@host:port/dbname
-    if (connectionString.StartsWith("postgres://"))
+    // Parse DATABASE_URL if it's in the format postgresql://user:password@host:port/dbname
+    if (connectionString.StartsWith("postgresql://"))
     {
-        var uri = new Uri(connectionString);
-        var npgsqlConnectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.Trim('/')};Username={uri.UserInfo.Split(':')[0]};Password={uri.UserInfo.Split(':')[1]};SSL Mode=Require;Trust Server Certificate=true";
-        connectionString = npgsqlConnectionString;
+        try
+        {
+            var uri = new Uri(connectionString);
+            var host = uri.Host;
+            var port = uri.Port > 0 ? uri.Port : 5432;
+            var database = uri.AbsolutePath.TrimStart('/');
+            
+            // Parse username and password from UserInfo
+            string username = "";
+            string password = "";
+            
+            if (!string.IsNullOrEmpty(uri.UserInfo))
+            {
+                var userInfoParts = uri.UserInfo.Split(':');
+                username = userInfoParts[0];
+                if (userInfoParts.Length > 1)
+                {
+                    password = userInfoParts[1];
+                }
+            }
+            
+            connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};SSL Mode=Require;Trust Server Certificate=true";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
+            Console.WriteLine($"Original connection string: {connectionString}");
+            throw new InvalidOperationException($"Invalid DATABASE_URL format: {ex.Message}", ex);
+        }
     }
+    
+    Console.WriteLine($"Using connection string: {connectionString.Replace(connectionString.Split("Password=")[1].Split(";")[0], "***")}");
     
     opt.UseNpgsql(connectionString);
 });
