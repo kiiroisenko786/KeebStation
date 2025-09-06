@@ -13,7 +13,29 @@ builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection(
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt => 
 {
-    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    // Get connection string - prioritize DATABASE_URL for production (Render.com)
+    var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+    
+    // If DATABASE_URL is not set, fall back to configuration
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    }
+    
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("Database connection string not found. Please set DATABASE_URL environment variable or configure DefaultConnection.");
+    }
+    
+    // Parse DATABASE_URL if it's in the format postgres://user:password@host:port/dbname
+    if (connectionString.StartsWith("postgres://"))
+    {
+        var uri = new Uri(connectionString);
+        var npgsqlConnectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.Trim('/')};Username={uri.UserInfo.Split(':')[0]};Password={uri.UserInfo.Split(':')[1]};SSL Mode=Require;Trust Server Certificate=true";
+        connectionString = npgsqlConnectionString;
+    }
+    
+    opt.UseNpgsql(connectionString);
 });
 builder.Services.AddCors();
 builder.Services.AddTransient<ExceptionMiddleware>();

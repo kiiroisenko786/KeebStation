@@ -26,7 +26,15 @@ public class DbInitializer
 
   private static async Task SeedData(StoreContext context, UserManager<User> userManager)
   {
-    context.Database.Migrate();
+    try
+    {
+      context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine($"Database migration failed: {ex}");
+      throw;
+    }
 
     if (!userManager.Users.Any())
     {

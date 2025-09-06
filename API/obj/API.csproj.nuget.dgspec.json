@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj": {}
+    "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj": {
+    "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\Taahaa\\.nuget\\packages\\",
-        "outputPath": "D:\\Taahaa\\projects\\KeebStation\\API\\obj\\",
+        "projectPath": "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\proje\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Taahaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\proje\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -64,15 +64,15 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[9.0.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[9.0.0, )"
             },
             "Stripe.net": {
               "target": "Package",
