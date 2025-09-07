@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile for KeebStation
 # Stage 1: Build React Client
-FROM node:20.18.0-alpine3.20 AS client-build
+FROM node:current-alpine3.21 AS client-build
 
 WORKDIR /app/client
 

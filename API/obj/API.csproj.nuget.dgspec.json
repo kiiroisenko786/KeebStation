@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj": {}
+    "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj": {
+    "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj",
+        "projectUniqueName": "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\proje\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\proje\\Desktop\\projects\\KeebStation\\API\\obj\\",
+        "projectPath": "D:\\Taahaa\\projects\\KeebStation\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Taahaa\\.nuget\\packages\\",
+        "outputPath": "D:\\Taahaa\\projects\\KeebStation\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\proje\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Taahaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
