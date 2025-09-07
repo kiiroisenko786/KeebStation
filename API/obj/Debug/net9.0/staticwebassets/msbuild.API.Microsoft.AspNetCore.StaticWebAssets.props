@@ -1,23 +1,5 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\index-B55Pi0nh.js'))">
-      <SourceType>Package</SourceType>
-      <SourceId>API</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/API</BasePath>
-      <RelativePath>assets/index-B55Pi0nh.js</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>hc481r57gz</Fingerprint>
-      <Integrity>/zq25GA/qcukQAyLjUOEKZEcf+oFfeWMpuCSmNM/Kb0=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\index-B55Pi0nh.js'))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\index-De7bnZP4.css'))">
       <SourceType>Package</SourceType>
       <SourceId>API</SourceId>
@@ -30,11 +12,29 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>lv13oy6muc</Fingerprint>
-      <Integrity>QexUNXtMqiNJn0btEkhIydUxVH2S3IU9DriOrHqB5RI=</Integrity>
+      <Fingerprint>1rm61pxfn4</Fingerprint>
+      <Integrity>U9K5ADjGgn/rcEbmEc6P2vZGRzSMOsc49ZM642zUK8w=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\index-De7bnZP4.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\index-iUiO4IrC.js'))">
+      <SourceType>Package</SourceType>
+      <SourceId>API</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/API</BasePath>
+      <RelativePath>assets/index-iUiO4IrC.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>rhla12pofx</Fingerprint>
+      <Integrity>TwR4HLxSjtoJwgM/GpOAMW3JbHyV0zgZSdAH2vJNf0o=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\index-iUiO4IrC.js'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\roboto-cyrillic-300-normal-BoeCr7ev.woff2'))">
       <SourceType>Package</SourceType>
@@ -1542,8 +1542,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>seprfgil70</Fingerprint>
-      <Integrity>nDfgKP0FREfBWCJPfror9FpQqm3Rub3WsAQY9sXd7xE=</Integrity>
+      <Fingerprint>qgsop1xjpm</Fingerprint>
+      <Integrity>5iwyHNjBkAy6fJMXdxDwd1qn2TaX4d/PN0x9UubXWZE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</OriginalItemSpec>
